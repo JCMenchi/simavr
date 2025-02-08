@@ -102,9 +102,12 @@ const struct mcu_t SIM_CORENAME = {
 	AVR_IOPORT_DECLARE(c, 'C', C),
 	AVR_IOPORT_DECLARE(d, 'D', D),
 
+	#ifdef USART_RXC_vect
 	//no PRUSART, upe=PE, no reg/bit name index, 'C' in RX/TX vector names
 	AVR_UART_DECLARE(0, 0, PE, , C),
-
+	#else
+	AVR_UART_DECLARE(0, 0, PE, ,),
+	#endif
 	.acomp = {
 		.mux_inputs = 8,
 		.mux = { AVR_IO_REGBIT(ADMUX, MUX0), AVR_IO_REGBIT(ADMUX, MUX1),
